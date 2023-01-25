@@ -1,6 +1,6 @@
-type category = 'business' | 'entertainment' | 'general' | 'health' | 'science' | 'sports' | 'technology';
-type language = 'ar'|'de'|'en'|'es'|'fr'|'he'|'it'|'nl'|'no'|'pt'|'ru'|'sv'|'ud'|'zh';
-type country = 'ae' | 'ar' | 'at' | 'au' | 'be' | 'bg' | 
+export type category = 'business' | 'entertainment' | 'general' | 'health' | 'science' | 'sports' | 'technology';
+export type language = 'ar'|'de'|'en'|'es'|'fr'|'he'|'it'|'nl'|'no'|'pt'|'ru'|'sv'|'ud'|'zh';
+export type country = 'ae' | 'ar' | 'at' | 'au' | 'be' | 'bg' | 
                 'br' | 'ca' | 'ch' | 'cn' | 'co' | 'cu' | 
                 'cz' | 'de' | 'eg' | 'fr' | 'gb' | 'gr' | 
                 'hk' | 'hu' | 'id' | 'ie' | 'il' | 'in' | 
@@ -9,41 +9,6 @@ type country = 'ae' | 'ar' | 'at' | 'au' | 'be' | 'bg' |
                 'ph' | 'pl' | 'pt' | 'ro' | 'rs' | 'ru' | 
                 'sa' | 'se' | 'sg' | 'si' | 'sk' | 'th' | 
                 'tr' | 'tw' | 'ua' | 'us' | 've' | 'za';
-
-export interface source {
-    id: string,
-    name: string,
-    description: string,
-    url: string,
-    category: category,
-    language: language,
-    country: country
-}
-
-export interface article {
-    source: {
-        id: string,
-        name: string
-    },
-    author: string,
-    title: string,
-    description: string,
-    url: string,
-    urlToImage: string,
-    publishedAt: string,
-    content: string
-}
-
-export interface dataSources {
-    status: 'ok'|'error',
-    sources: source[]
-}
-
-export interface dataArticles {
-    status: 'ok'|'error',
-    totalResults: number,
-    articles: article[]
-}
 
 export interface request {
     endpoint: string,
@@ -64,3 +29,5 @@ export interface options {
     pageSize?: number,
     page?: number
 }
+
+export type callbackResponse<T> = (data: T) => void;
