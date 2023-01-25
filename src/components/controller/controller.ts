@@ -3,11 +3,11 @@ import { dataSources, callbackSource } from '../../types/source';
 import { dataArticles, callbackArticle } from '../../types/article';
 
 class AppController extends AppLoader {
-    getSources(callback: callbackSource) {
+    public getSources(callback: callbackSource): void {
         super.getResp<dataSources>({ endpoint: 'sources' }, callback);
     }
 
-    getNews(e: Event, callback: callbackArticle) {
+    public getNews(e: Event, callback: callbackArticle): void {
         let target = <HTMLElement>e.target;
         const newsContainer = <HTMLElement>e.currentTarget;
 

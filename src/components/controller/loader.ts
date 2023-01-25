@@ -10,16 +10,16 @@ class Loader {
         this.options = options;
     }
 
-    getResp<T extends dataSources | dataArticles>(
+    public getResp<T extends dataSources | dataArticles>(
         { endpoint, options = {} }: request,
         callback: callbackResponse<T> = () => {
             console.error('No callback for GET response');
         }
-    ) {
+    ): void {
         this.load<T>('GET', endpoint, callback, options);
     }
 
-    errorHandler(res: Response) {
+    private errorHandler(res: Response): Response {
         if (!res.ok) {
             if (res.status === 401 || res.status === 404)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -29,7 +29,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: options, endpoint: string) {
+    private makeUrl(options: options, endpoint: string): string {
         const urlOptions: { [index: string]: string | number } = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -40,12 +40,12 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load<T extends dataSources | dataArticles>(
+    private load<T extends dataSources | dataArticles>(
         method: 'GET',
         endpoint: string,
         callback: callbackResponse<T>,
         options: options = {}
-    ) {
+    ): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
